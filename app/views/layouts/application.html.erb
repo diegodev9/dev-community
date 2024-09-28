@@ -6,9 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= yield :head %>
-
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
@@ -17,8 +15,17 @@
     <%= javascript_importmap_tags %>
     <%= hotwire_livereload_tags if Rails.env.development? %>
   </head>
-
   <body>
-    <%= yield %>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 mx-auto">
+          <%= render 'shared/header'  %>
+        </div>
+        <%= yield %>
+        <div class="col-lg-10 mx-auto">
+          <%= render 'shared/footer'  %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
