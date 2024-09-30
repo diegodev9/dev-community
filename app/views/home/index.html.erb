@@ -1,10 +1,31 @@
-<h1>Hello! Welcome to the developers community!</h1>
-<i class="fa-solid fa-flag"></i>
-<i class="fa-brands fa-amazon"></i>
-<i class="fa-regular fa-bell"></i>
-<i class="fa-solid fa-refresh fa-2xl fa-spin"></i>
-<i class="fa-solid fa-gem fa-rotate-180"></i>
-<i class="fa-solid fa-gem fa-rotate-by" style="color: green; --fa-rotate-angle: 45deg"></i>
-<i class="fa-brands fa-youtube" style="color: red;"></i>
-<i class="fa-regular fa-bell fa-beat"></i>
-<i class="fa-brands fa-instagram"></i>
+<div class="col-lg-10 mx-auto mt-5">
+  <div class="card mt-4 mb-4">
+    <div class="card-body">
+      <h3 class="text-center mb-3">Search professionals across the world!</h3>
+      <%= search_form_for @q, url: root_path do |f| %>
+        <div class="input-group mb-3">
+          <%= f.search_field :city_or_country_cont, class: 'form-control', placeholder: 'Search by city or country', aria: { label:"Search by country or city", describedby: "button-addon2" } %>
+          <%= f.submit "Search", class: 'btn btn-primary', id: "button-addon2" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="row mt-4 mb-4">
+    <% @users.each do |user| %>
+      <div class="col-lg-3 mb-3 mt-3">
+        <div class="card text-center shadow h-100">
+          <div class="card-body">
+            <%= image_tag 'user.png', style: "width: 150px; border-radius: 50%; border: 2px solid #0d6efd", class: "mb-3" %>
+            <div class="user-info">
+              <h5><%= user.name %></h5>
+              <p class="lead"><%= user.profile_title %></p>
+              <small class="text-primary"><%= user.country %></small><br>
+
+              <%= link_to 'View Profile', member_path(user), class: 'btn btn-primary mt-3' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
