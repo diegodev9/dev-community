@@ -5,4 +5,4 @@ import "popper";
 import "bootstrap";
 import "@fortawesome/fontawesome-free";
 
-window.bootstrap = bootstrap;
+//window.bootstrap = bootstrap;
