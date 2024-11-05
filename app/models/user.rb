@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
 
+  has_many :work_experiences
+
   after_commit :generate_slug
 
   PROFILE_TITLE = [
