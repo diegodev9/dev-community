@@ -32,7 +32,7 @@
             Employment Type
             <span class="text-danger">*</span>
           </label>
-          <%= form.select :employment_type, options_for_select(WorkExperience::EMPLOYMENT_TYPE), {prompt: 'Select employment type'}, class: 'form-select' %>
+          <%= form.select :employment_type, options_for_select(WorkExperience::EMPLOYMENT_TYPE, selected: form.object.employment_type), {prompt: 'Select employment type'}, class: 'form-select' %>
         </div>
         <div class="form-group">
           <label for="" class="mb-2 mt-3">
@@ -46,9 +46,15 @@
             Location Type
             <span class="text-danger">*</span>
           </label>
-          <%= form.select :location_type, options_for_select(WorkExperience::LOCATION_TYPE), {prompt: 'Select location type'}, class: 'form-select' %>
+          <%= form.select :location_type, options_for_select(WorkExperience::LOCATION_TYPE, selected: form.object.location_type), {prompt: 'Select location type'}, class: 'form-select' %>
         </div>
         <div class="form-group row">
+          <div class="col-lg-12 mt-3">
+            <div class="form-check form-switch">
+              <%= form.check_box :currently_working_here, class: 'form-check-input', role: 'switch', data: { controller: "disable-end-date" } %>
+              <label for="work_experience_currently_working_here" class="form-check-label">I am currently working here</label>
+            </div>
+          </div>
           <div class="col-lg-6">
             <label for="" class="mb-2 mt-3">
               Start Date
@@ -63,12 +69,7 @@
             </label>
             <%= form.date_field :end_date, class: 'form-control' %>
           </div>
-          <div class="col-lg-6 mt-3">
-            <div class="form-check form-switch">
-              <%= form.check_box :currently_working_here, class: 'form-check-input', role: 'switch' %>
-              <label for="currently_working_here" class="form-check-label">I am currently working here</label>
-            </div>
-          </div>
+
         </div>
         <div class="form-group">
           <label for="" class="mb-2 mt-3">Description</label>

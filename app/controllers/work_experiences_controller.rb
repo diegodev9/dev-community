@@ -1,5 +1,4 @@
 class WorkExperiencesController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_work_experience, only: %i[edit update destroy]
 
   def new
@@ -10,12 +9,53 @@ class WorkExperiencesController < ApplicationController
   end
 
   def create
+    @work_experience = current_user.work_experiences.new(work_experience_params)
+
+    if @work_experience.save
+      # format.html { }
+      render_turbo_stream(
+        "append",
+        "work_experience_items",
+        "work_experiences/work_experience",
+        { work_experience: @work_experience }
+      )
+    else
+      # format.html { }
+      render_turbo_stream(
+        "replace",
+        "remote_modal",
+        "shared/turbo_modal",
+        { form_partial: "work_experiences/form", modal_title: "Add new work experience" }
+      )
+    end
   end
 
   def update
+    if @work_experience.update(work_experience_params)
+      format.html { }
+      render_turbo_stream(
+        "replace",
+        "work_experience_item_#{@work_experience.id}",
+        "work_experiences/work_experience",
+        { work_experience: @work_experience }
+      )
+    else
+      format.html { }
+      render_turbo_stream(
+        "replace",
+        "remote_modal",
+        "shared/turbo_modal",
+        { form_partial: "work_experiences/form", modal_title: "Edit work experience" }
+      )
+    end
   end
 
   def destroy
+    @work_experience.destroy
+    render_turbo_stream(
+      "remove",
+      "work_experience_item_#{@work_experience.id}"
+    )
   end
 
   private
@@ -25,6 +65,6 @@ class WorkExperiencesController < ApplicationController
   end
 
   def work_experience_params
-    params.require(:work_experience).permit(:start_date, :end_date, :currently_working_here, :company, :employment_type, :description, :job_title, :user_id)
+    params.require(:work_experience).permit(:start_date, :end_date, :currently_working_here, :company, :employment_type, :location, :location_type, :description, :job_title, :user_id)
   end
 end

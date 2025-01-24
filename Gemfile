@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.2.1"
+gem "rails", "~> 7.2.2"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 # Use postgresql as the database for Active Record
@@ -43,6 +43,13 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  # letter opener
+  gem "letter_opener"
+
+  # testing
+  gem "factory_bot_rails"
+  gem "rspec-rails"
 end
 
 group :development do
@@ -65,3 +72,5 @@ gem "faker"
 gem "ransack"
 gem "devise"
 gem "kaminari"
+gem "bootstrap5-kaminari-views"
+gem "ruby-lsp"
